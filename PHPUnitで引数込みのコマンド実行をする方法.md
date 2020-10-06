@@ -47,3 +47,6 @@ $argv = $_SERVER['argv'];
 これによりAction側で指定した引数がコマンドライン引数と同じところに入るので、
 
 通常通り使える。
+
+## 参考文献
+https://phpunit.de/manual/5.5/ja/writing-tests-for-phpunit.html#writing-tests-for-phpunit.data-providers
