@@ -10,17 +10,6 @@
 ```
 入れたい引数を配列に格納し、更に全体を配列に格納する。
 
-複数入れたい場合は
-```
-    public function idProvider()
-    {
-        return [
-            [1,2,3],
-            [4,5,6],
-        ];
-    }
-```
-
 ## 2. 
 
 ```
@@ -48,5 +37,22 @@ $argv = $_SERVER['argv'];
 
 通常通り使える。
 
+## 補足：複数の引数を入れたいとき/複数の引数パターンを入れたいとき
+```
+    public function idProvider()
+    {
+        return [
+            [1,2,3],
+            [4,5,6],
+        ];
+    }
+```
+一回の実行で引数を複数入れたいときは、狭い配列に複数の値を並べればよい。
+
+一つのテストケースで複数の引数パターンを試したい場合は、狭い配列をパターンの数だけ並べる。
+
+テストケースごとに引数を帰る場合は、dataProviderを使わず直接メソッド内に定義したほうが正確。
+
 ## 参考文献
+PHPUnit マニュアル　2. PHPUnit 用のテストの書き方　データプロバイダ
 https://phpunit.de/manual/5.5/ja/writing-tests-for-phpunit.html#writing-tests-for-phpunit.data-providers
