@@ -62,4 +62,52 @@
   - OK 17:17
   
 ## ケース007
-　- todo；線dの値、欠測状態にする
+　[] todo：send.csvの値、1.1から欠測状態にする
+  - 欠測分の日付、10/31で統一
+  - 問題：なぜかUndefined
+    1) SendPumpingStationStatusTest::testCase007
+    Undefined index: observTime
+
+    C:\Users\pc-000491\weather\src\Action\SendPumpingStationStatusAction.php:94
+    C:\Users\pc-000491\weather\tests\Functional\SendPumpingStationStatusTest.php:962
+    - 解決：DB側の'id'が'ID'に
+    　- 要因：一斉置換か手直し時に巻き込まれた
+    　- 解決してない（同じ症状が出る）
+    - 要因：$api_masterに意図しない要素が入っていて、その要素の配列にobservTimeがない
+      - 問題：23:30のデータは入っているが、23:48のデータが入っていない
+        - 解決：send.csvの日付、2020-10-02になってた
+      - 問題：順番がおかしい
+        - 解決：「更新されるカラム」の期待値書き換える
+  - OK：2020-10-21 13:40
+  
+## ケース008
+  - OK：14:03
+  
+## ケース009
+　- OK：14:27
+ 
+## ケース010
+  - 50分台：直近
+  - 40分台：欠測復活
+  - 30分台：未送信
+  - OK：14:56
+  
+## ケース007に必須以外全部null入れるの巻
+  - dataUpload()書き換え、以下のやり方に
+    $stmt->bindParam(':flooding', $line2, $line2 == "null" ? PDO::PARAM_NULL : PDO::PARAM_STR);
+  - OK：15:30ごろ
+
+## ケース009に（ｒｙ
+  - 問題：selectNotSent()から未送信データを取得するときにnullが0になってしまう
+    - そもそも：send.csvからデータ入れたときにnullが0になってる説
+    - 試行：010コメント合うとして実行、007のDB状態にする
+    - 解決：send.csvのスペース詰めてなかった
+  - OK：16:05
+
+## 確認＆仕上げ
+  - dataUploadObservPoint()をSetUp()内に移動、呼び出しが1回だけに
+  - 問題：ケース003、rain_water_pumpが欠測に付きnullだったとき0が入ってる問題
+  　- 要因：欠測時''やらを入れてる
+    - 解決：欠測時にnullを入れる
+    - 要因：$expected_resultsを文字列にキャストするとき、is_nullの三項演算子入れる
+  
