@@ -1,0 +1,42 @@
+# BOUSAI-77 【気象】トランザクション制御追加
+
+## 概要
+更新処理にトランザクション制御を追加する
+
+## 目標
+浸水警報を除く４機能のinsertUpdate()にてトランザクション処理を実装する
+
+## 提出物
+- WaterLevelSendDao.php
+- RainfallSendDao.php
+- PumpingStationStatusSendDao.php
+
+## 計画
+各工程ごとにやることを分割
+
+### 方針決定・計画書作成
+- トランザクション処理について学ぶ
+- トランザクション処理の実装方法について調査・検討する
+
+### 実装・修正
+- トランザクション処理を実装する
+
+### 目視確認
+
+### 単体テスト（テスト準備～テスト実行～テスト後始末）
+
+### 最終確認
+
+### 提出
+
+## 経過メモ
+- 不明点：トランザクション処理ができていることを確認するには？
+  - SQL例外を発生させて、当該処理がされていないこと（ロールバックされていること）を確認
+    - わざとSQLを間違えるなど
+- phpのPDOにおいけるトランザクション処理のやり方
+  - beginTransaction()とcommit()で囲む？
+    - https://www.php.net/manual/ja/pdo.transactions.php
+    - https://gray-code.com/php/transaction-by-using-pdo/
+- いちおう見様見真似で実装
+- 単体テストも通過
+    
