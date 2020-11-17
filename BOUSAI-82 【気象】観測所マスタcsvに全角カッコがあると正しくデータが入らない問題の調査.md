@@ -33,6 +33,7 @@ SendRiverWaterLevelTest/m_observ_point.csv
     - bindParam()
     - PDO
 - [ ] 「MySQL　全角カッコ」などでググる
+- [ ] 「ロケール」について深く知る必要
 
 ### 実装・修正
 - [ ] 調査のまとめを書く
@@ -64,3 +65,7 @@ SendRiverWaterLevelTest/m_observ_point.csv
   - https://www.softel.co.jp/blogs/tech/archives/2331
   - https://qiita.com/reika_i/items/cd11ffdf23a3f68b5ebc
   - 変更してOS再起動
+  - 何も変わらない
+- php.iniでauto_detect_line_endingsを有効にしてみた
+  - https://teratail.com/questions/2050
+  - 特に変わらず
