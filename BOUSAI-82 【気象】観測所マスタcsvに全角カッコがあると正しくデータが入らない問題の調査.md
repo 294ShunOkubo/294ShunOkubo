@@ -54,8 +54,13 @@ SendRiverWaterLevelTest/m_observ_point.csv
 ## メモ
 - S-JISでfgetcsv()すると文字化けとか起きるらしい
 - $line を var_dump()してみた
+  - 参考：http://piyopiyocs.blog115.fc2.com/blog-entry-513.html
+  - 実行結果：
     [4] =>
     string(41) "伊賀町（愛宕橋）"
     2320200400002""
   - つまりここの改行が「改行コード」であっても「データの区切り」とは認識されていないのが問題
-  
+- 環境変数LANGの設定してみた
+  - https://www.softel.co.jp/blogs/tech/archives/2331
+  - https://qiita.com/reika_i/items/cd11ffdf23a3f68b5ebc
+  - 変更してOS再起動
