@@ -69,3 +69,23 @@ SendRiverWaterLevelTest/m_observ_point.csv
 - php.iniでauto_detect_line_endingsを有効にしてみた
   - https://teratail.com/questions/2050
   - 特に変わらず
+- 藤原さんに相談
+  - fgetcsv()はロケール設定によって挙動が変わる
+- ロケール設定の中に文字関係の設定がある？
+- 現状どういう環境で動いてる？：
+  ```
+  LC_COLLATE=C;
+  LC_CTYPE=Japanese_Japan.932;
+  LC_MONETARY=C;
+  LC_NUMERIC=C;
+  LC_TIME=C
+  ```
+- この中で今回の件で関係しそうなのは？：LC_CTYPE
+
+- setlocale(LC_ALL, "C");してみた
+  - https://iamapen.hatenablog.com/entry/2017/08/10/134224
+  - ズレもなく余計なダブルクオーテーションもない
+  - setlocale(LC_CTYPE, "C");でも正しく動く
+    - やはりLC_CTYPEがうまく設定されてなかったことが根本原因
+    
+    - MS932とSHIFT- JISの違い？
