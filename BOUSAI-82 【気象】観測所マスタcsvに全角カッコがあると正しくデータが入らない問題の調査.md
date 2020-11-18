@@ -88,4 +88,7 @@ SendRiverWaterLevelTest/m_observ_point.csv
   - setlocale(LC_CTYPE, "C");でも正しく動く
     - やはりLC_CTYPEがうまく設定されてなかったことが根本原因
     
-    - MS932とSHIFT- JISの違い？
+- MS932とSHIFT- JISの違い？
+
+- とりあえずcommit
+- このあと：河川以外の他4機能の横展開
