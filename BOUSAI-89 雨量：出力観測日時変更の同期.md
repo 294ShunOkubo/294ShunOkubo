@@ -33,6 +33,26 @@ BOUSAI-89 雨量：出力観測日時変更の同期
   - [x] 固有名詞が違う（rainとwaterlevelなどの違い）
     - 自明
 
+### おまけ：リファクタリングしたい点
+
+- selectMissing()とselectNotSent, 将来のrainfallテーブル仕様変更に備えて引数DATA_TYPE持たす？
+- selectWithObservpoint()かselectByTimeAndObservpointかに統一したい
+- 欠測再取得データを$api_data_missingに入れるか判定、if (count($api_data_missing_processed) > 0)に統一したほうがいいと思う
+  - db時代にデータがあってもprocessForAPIで消える可能性があるため
+  - 検討：$db_dataにデータがないとprocessForAPIでエラー吐く？
+    - 吐くならprocessForAPI呼び出しをif (count($db_data_missing) > 0)で囲む必要
+- ifと()の間にスペース足りてない
+- jsonフォーマット統一、$master_for_jsonをいじること
+　- もはや$api_data_masterをいじればいい？
+- 貯留池アクションL238の&いらない
+- 雨量のdata_counterを消す処理、$is_missing = false;の後に移動してforeachを一つ減らす
+
+テストケース.xlxs修正
+---
+
+- 欠測再取得＆未送信かぶり対策、ケースに落とし込み済（case009）
+- 欠測再取得２／３で挟む（◯×◯）をcase011に追加
+
 ## メモ
 - 「観測所マスタに存在しない観測所コードを持ったデータがDBから取得された場合」は考慮すべき？
   - 特に何も起こらない（欠測判定は観測所マスタにある該当観測所コード全てのデータを産ませるためのもののため）
