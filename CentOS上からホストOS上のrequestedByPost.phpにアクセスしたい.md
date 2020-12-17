@@ -22,3 +22,14 @@
 - 10.0.2.2
   - 前やんなかったっけ？
     - xampp起動してなかったからやろ
+    
+## 問題：現在時刻が9時間遅い
+- おそらくロケールの問題
+    - unixtimeからdate関数で時刻に変えるときに、おそらくJSTでなくGMTで変換されている
+- 対策案
+    - date_default_timezone_set()を差し込み、タイムゾーンを明示的に指定する
+    - php.ini内のdate.timezone stringを編集する
+        - php.iniがパーミッションの問題で変更できない
+            - sudo chmod 777 php.ini
+                - scp: /etc/php.ini: set times: Operation not permitted
+                - ファイルの書き換えはできているが治っていない（適用されていない？）
