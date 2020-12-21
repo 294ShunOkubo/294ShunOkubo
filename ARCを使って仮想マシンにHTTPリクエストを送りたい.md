@@ -1,7 +1,8 @@
 # 
 
 ## やりたいこと
-HTTPリクエストを送信し、サイレン制御時に返ってくるjsonの中身を確認したい
+http://192.168.33.10/weather/api/sirencontrol
+にHTTPリクエストを送信し、サイレン制御時に返ってくるjsonの中身を確認したい
 ※jsonの中身＝送信したデータ＋array("result" => 1)
 
 ## 現状
@@ -12,7 +13,8 @@ ARCを使ってHTTPリクエストを送ると404エラーが出る。
 - いろいろなIPにヘッダとボディをつけて送信
   - どれもうまくいかず
   - 調べたところゲストOSへのIPはvagrantfileで設定した192.168.33.10に固定される
-    - https://ja.stackoverflow.com/questions/54642/vagrant%E3%81%A7%E3%83%9B%E3%82%B9%E3%83%88%E3%81%8B%E3%82%89%E3%82%B2%E3%82%B9%E3%83%88%E3%81%AB%E9%80%9A%E4%BF%A1%E3%81%8C%E5%87%BA%E6%9D%A5%E3%81%AA%E3%81%84
+  - https://ja.stackoverflow.com/questions/54642/vagrant%E3%81%A7%E3%83%9B%E3%82%B9%E3%83%88%E3%81%8B%E3%82%89%E3%82%B2%E3%82%B9%E3%83%88%E3%81%AB%E9%80%9A%E4%BF%A1%E3%81%8C%E5%87%BA%E6%9D%A5%E3%81%AA%E3%81%84
+  - 牧野さんもこれでやってる
 - https://192.168.33.10/api/sirencontrolにヘッダもボディもつけずに送信
   - 0 The service refused to connect.
 - http://192.168.33.10にヘッダもボディもつけずに送信
@@ -25,6 +27,8 @@ ARCを使ってHTTPリクエストを送ると404エラーが出る。
     {"submergealert":[{"observPointCode":"0000000000000","observTime":"2020\/12\/21 08:58:50","sirenManual":0,"result":0,"errorMessage":"Syntax error"}]}
     ```
   - やはりIPの問題？
+- Apatchの電源つけた
+  - systemctl restart httpd
   
 ## やりたいこと
 - 下記の手順をやる？（Host-only ネットワーク3/1追記欄）
