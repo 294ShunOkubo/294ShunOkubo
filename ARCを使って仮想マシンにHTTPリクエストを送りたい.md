@@ -12,9 +12,30 @@ ARCを使ってHTTPリクエストを送ると404エラーが出る。
 ## やっていること（確認したこと）
 - https://kekaku.addisteria.com/wp/20181228112237 の手順でインストール
 - wikiの「構築手順」を行う（6.cron設定を除く）
+  - 未達成：4.httpd.conf 追加
+    - パーミッション書き換え
+    - 当該ファイルを更新しようとすると以下のメッセージが出る
+      - scp: /etc/httpd/conf/httpd.conf: set times: Operation not permitted
+      - しかしファイルを見ると書き換えはできている
+    - リロード `systemctl reload httpd`
 - 仮想マシン側のApatchサーバーのrunning
 - 仮想マシン側のmysqlサーバーのrunning
 - java SystemManager の実行
+
+## できました
+- ```
+  {"submergealert":[{"observPointCode":"2320201700010","observTime":"2020\/10\/28 10:00","sirenManual":1,"result":1}]}
+  ```
+- ```
+  [vagrant@localhost sasatest]$ java SystemManager
+  2020/12/22 11:58:27     --------------------------------
+  2020/12/22 11:58:27     system start
+  2020/12/22 11:58:27     read system_property start
+  2020/12/22 11:58:27     read system_property end
+  2020/12/22 11:58:32     <tx_res>OK
+
+  ```
+- 直接的な原因：
 
 ## やりたいこと
 - 下記の手順をやる？（Host-only ネットワーク3/1追記欄）
@@ -22,7 +43,10 @@ ARCを使ってHTTPリクエストを送ると404エラーが出る。
   - virtualBox設定変更
 - VirtualBoxのポートフォワーディングを使う？
   - https://qiita.com/unau/items/0a4cec8a4f9abaca0b31
-- 
+- 直接的な原因：「4.httpd.conf 追加」がちゃんと完了していなかった
+  - 学び：詰まったところはちゃんと記録しておこう！
+    - というかSlackでサクッと聞こう！
+  - チケットのないタスクもちゃんと作業ログを残そう！
   
 ## わからない要素
 - httpなのか、httpsなのか
